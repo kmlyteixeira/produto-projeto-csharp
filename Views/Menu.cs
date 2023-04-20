@@ -27,7 +27,10 @@ namespace Views {
       this.btnProduto.Location = new Point(10, 50);
       this.btnProduto.Size = new Size(280, 30);
       this.btnProduto.Font = new Font("Arial", 12, FontStyle.Bold);
-      this.btnProduto.Click += (sender, e) => new Produto();
+      this.btnProduto.Click += (sender, e) => {
+        this.Hide();
+        new Produto();
+      };
 
       this.btnSair.Text = "Sair";
       this.btnSair.Location = new Point(10, 90);
@@ -43,7 +46,6 @@ namespace Views {
       this.Size = new Size(500, 350);
       this.StartPosition = FormStartPosition.CenterScreen;
       this.ShowDialog();
-
     }
   }
 }
