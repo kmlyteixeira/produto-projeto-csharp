@@ -2,27 +2,24 @@ using System.Collections.Generic;
 
 namespace Controllers {
     public class Produto {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public double Preco { get; set; }
-
-        public List<Produto> produtos = new List<Produto>();
-
-        public Produto(string nome, string preco) {
-            this.Id = produtos.Count + 1;
-            this.Nome = nome;
-            this.Preco = double.Parse(preco);
-
-            produtos.Add(this);
+        public static List<Models.Produto> GetProdutos() {
+            return Models.Produto.GetProdutos();
         }
 
-        public void Editar(string nome, string preco) {
-            this.Nome = nome;
-            this.Preco = double.Parse(preco);
+        public static Models.Produto GetProdutoById(int id) {
+            return Models.Produto.GetProdutoById(id);
         }
 
-        public void Excluir(int id) {
-            produtos.Remove(produtos.Find(p => p.Id == id));
+        public static void DeleteProdutoById(int id) {
+            Models.Produto.DeleteProdutoById(id);
+        }
+
+        public static void UpdateProdutoById(int id, string nome, double preco) {
+            Models.Produto.UpdateProdutoById(id, nome, preco);
+        }
+
+        public static void CreateProduto(string nome, double preco) {
+            new Models.Produto(nome, preco);
         }
     }
 }
