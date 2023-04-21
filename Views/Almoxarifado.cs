@@ -1,10 +1,9 @@
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Views
 {
-  public class Produto : Form
+  public class Almoxarifado : Form
   {
 
     private Label titulo;
@@ -19,7 +18,7 @@ namespace Views
     private Button btnExcluir;
 
 
-    public Produto()
+    public Almoxarifado()
     {
       InitializeComponent();
     }
@@ -33,7 +32,7 @@ namespace Views
       this.btnExcluir = new Button();
       this.btnCancelar = new Button();
 
-      this.titulo.Text = "Lista de Produtos";
+      this.titulo.Text = "Lista Almoxarifado";
       this.titulo.Location = new Point(10, 10);
       this.titulo.Size = new Size(280, 30);
       this.titulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -46,7 +45,6 @@ namespace Views
       this.lista.GridLines = true;
       this.lista.Columns.Add("Id", 50);
       this.lista.Columns.Add("Nome", 100);
-      this.lista.Columns.Add("Preço", 100);
 
       this.LoadList();
 
@@ -56,7 +54,7 @@ namespace Views
       this.btnSalvar.Font = new Font("Arial", 12, FontStyle.Bold);
       this.btnSalvar.Click += (sender, e) =>
       {
-        new CadastroProduto(0);
+        new CadastroAlmoxarifado(0);
         this.LoadList();
       };
 
@@ -66,7 +64,7 @@ namespace Views
       this.btnEditar.Font = new Font("Arial", 12, FontStyle.Bold);
       this.btnEditar.Click += (sender, e) =>
       {
-        new CadastroProduto(
+        new CadastroAlmoxarifado(
           int.Parse(this.lista.SelectedItems[0].Text)
         );
         this.LoadList();
@@ -79,15 +77,15 @@ namespace Views
       this.btnExcluir.Click += (sender, e) =>
       {
         DialogResult result = MessageBox.Show(
-          "Deseja realmente excluir o produto?",
-          "Excluir Produto",
+          "Deseja realmente excluir o Almoxarifado?",
+          "Excluir Almoxarifado",
           MessageBoxButtons.YesNo,
           MessageBoxIcon.Question
         );
 
         if (result == DialogResult.No) return;
 
-        Controllers.Produto.DeleteProdutoById(
+        Controllers.Almoxarifado.DeleteAlmoxarifadoById(
           int.Parse(this.lista.SelectedItems[0].Text)
         );
         this.LoadList();
@@ -107,7 +105,7 @@ namespace Views
       this.Controls.Add(this.btnExcluir);
       this.Controls.Add(this.btnCancelar);
 
-      this.Text = "Produtos";
+      this.Text = "Almoxarifado";
       this.Size = new Size(750, 600);
       this.StartPosition = FormStartPosition.CenterScreen;
       this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -125,11 +123,10 @@ namespace Views
     {
       this.lista.Items.Clear();
 
-      foreach (Models.Produto produto in Controllers.Produto.GetProdutos())
+      foreach (Models.Almoxarifado almoxarife in Controllers.Almoxarifado.GetAlmoxarifados())
       {
-        ListViewItem item = new ListViewItem(produto.Id.ToString());
-        item.SubItems.Add(produto.Nome);
-        item.SubItems.Add(produto.Preco.ToString());
+        ListViewItem item = new ListViewItem(almoxarife.Id.ToString());
+        item.SubItems.Add(almoxarife.Nome);
         this.lista.Items.Add(item);
       }
     }
