@@ -14,12 +14,16 @@ namespace Controllers {
             Models.Produto.DeleteProdutoById(id);
         }
 
-        public static void UpdateProdutoById(int id, string nome, double preco) {
-            Models.Produto.UpdateProdutoById(id, nome, preco);
+        public static void UpdateProdutoById(int id, string nome, string preco) {
+            preco = preco.Replace("$", "");
+            preco = preco.Replace(" ", "");
+            Models.Produto.UpdateProdutoById(id, nome, double.Parse(preco));
         }
 
-        public static void CreateProduto(string nome, double preco) {
-            new Models.Produto(nome, preco);
+        public static void CreateProduto(string nome, string preco) {
+            preco = preco.Replace("$", "");
+            preco = preco.Replace(" ", "");
+            new Models.Produto(nome, double.Parse(preco));
         }
     }
 }
