@@ -55,6 +55,11 @@ namespace Views
       this.cbProduto.Location = new Point(10, 140);
       this.cbProduto.Size = new Size(280, 30);
       this.cbProduto.Font = new Font("Arial", 12, FontStyle.Bold);
+      
+      foreach (Models.Produto produto in Controllers.Produto.GetProdutos())
+      {
+        this.cbProduto.Items.Add(produto.Nome);
+      };
 
       this.lblAlmoxarifado.Text = "Almoxarifado";
       this.lblAlmoxarifado.Location = new Point(10, 170);
@@ -64,6 +69,11 @@ namespace Views
       this.cbAlmoxarifado.Location = new Point(10, 200);
       this.cbAlmoxarifado.Size = new Size(280, 30);
       this.cbAlmoxarifado.Font = new Font("Arial", 12, FontStyle.Bold);
+
+      foreach (Models.Almoxarifado almoxarifado in Controllers.Almoxarifado.GetAlmoxarifados())
+      {
+        this.cbAlmoxarifado.Items.Add(almoxarifado.Nome);
+      };
 
       if (id != 0)
       {
